@@ -14,7 +14,7 @@ class HomePage extends StatelessWidget {
       builder: (controller) {
         return Scaffold(
           appBar: AppBar(
-            title: Text('ShopX'),
+            title: const Text('রস মিষ্টির সৃষ্টি'),
             centerTitle: true,
             elevation: 10,
             leading: const Icon(
@@ -24,46 +24,50 @@ class HomePage extends StatelessWidget {
               IconButton(onPressed: (){}, icon:Icon(Icons.shopping_cart))
             ],
           ),
-          body: Column(
-            children: [
-              Padding(padding: EdgeInsets.all(16),
-              child: Row(
-                children: [
-                  const Expanded(child: Text('ShopX',
-                    style: TextStyle(fontSize: 32,fontWeight: FontWeight.w900),
-                  )),
-                  IconButton(onPressed: (){}, icon: const Icon(Icons.view_list_rounded)),
-                  IconButton(onPressed: (){}, icon: const Icon(Icons.grid_view)),
+          body: Padding(
+            padding: const EdgeInsets.all(10.0),
+            child: Column(
+              children: [
+                Padding(padding: const EdgeInsets.all(16),
+                child: Row(
+                  children: [
+                    const Expanded(child: Text('রস মিষ্টির সৃষ্টি',
+                      style: TextStyle(fontSize: 32,fontWeight: FontWeight.w900),
+                    )),
+                    IconButton(onPressed: (){}, icon: const Icon(Icons.view_list_rounded)),
+                    IconButton(onPressed: (){}, icon: const Icon(Icons.grid_view)),
 
 
 
-                ],
-              ),
-              ),
-              Expanded(
-                child: Obx(() {
-                  if(controller.isLoading.value)
-                    return Center(child: CircularProgressIndicator());
-                  else
-               return   MasonryGridView.count(
-                    crossAxisCount: 2,
-                    mainAxisSpacing: 10,
-                    itemCount: controller.product.length,
-                    crossAxisSpacing: 10,
-
-
-                    itemBuilder: (context, index) {
-                      return ProductTile(controller.product[index]);
-                    },
-
-                  );
-
-                }
-                )
-
+                  ],
                 ),
+                ),
+                Expanded(
+                  child: Obx(() {
+                    if(controller.isLoading.value) {
+                      return const Center(child: CircularProgressIndicator());
+                    } else {
+                      return   MasonryGridView.count(
+                      crossAxisCount: 2,
+                      mainAxisSpacing: 10,
+                      itemCount: controller.product.length,
+                      crossAxisSpacing: 10,
 
-            ],
+
+                      itemBuilder: (context, index) {
+                        return ProductTile(controller.product[index]);
+                      },
+
+                    );
+                    }
+
+                  }
+                  )
+
+                  ),
+
+              ],
+            ),
           ),
 
         );

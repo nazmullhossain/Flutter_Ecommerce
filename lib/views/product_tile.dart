@@ -1,12 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../controllers/cart_controller.dart';
 import '../models/model_porduct.dart';
 
 
 class ProductTile extends StatelessWidget {
   final Product product;
-  const ProductTile(this.product);
+  final CartController cartController = Get.find();
+ ProductTile(this.product);
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -75,13 +79,25 @@ class ProductTile extends StatelessWidget {
                   
                 ],
               ),
+
             ),
-          Text('\$${product.price}',style: TextStyle(fontWeight: FontWeight.w800, fontSize: 32),)
-          
-          
-          
+          Text('\$${product.price}',style: TextStyle(fontWeight: FontWeight.w800, fontSize: 32),),
+
+          RaisedButton(onPressed: (){
+            // cartController.addToCart(
+            //  product[index]
+            // );
+          },
+            color: Colors.blue,
+            textColor: Colors.white70,
+            child: Text("Add to cart"),
+          ),
+Text("hellow")
+
         ],
+
       ),
+
     );
   }
 }
