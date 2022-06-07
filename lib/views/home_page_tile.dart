@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:get/get.dart';
+import 'package:testecommerce/views/product_tile.dart';
 import '../controllers/product_controller.dart';
 class HomePage extends StatelessWidget {
   final ProductController controller = Get.find();
@@ -40,28 +41,24 @@ class HomePage extends StatelessWidget {
               ),
               ),
               Expanded(
-                child: Obx(()=>
+                child: Obx(() {
+                  if(controller.isLoading.value)
+                    return Center(child: CircularProgressIndicator());
+                  else
+               return   MasonryGridView.count(
+                    crossAxisCount: 2,
+                    mainAxisSpacing: 10,
+                    itemCount: controller.product.length,
+                    crossAxisSpacing: 10,
 
 
-                     MasonryGridView.count(
-                      crossAxisCount: 2,
-                      mainAxisSpacing: 10,
-                       itemCount: controller.product.length,
-                      crossAxisSpacing: 10,
+                    itemBuilder: (context, index) {
+                      return ProductTile(controller.product[index]);
+                    },
 
+                  );
 
-                      itemBuilder: (context, index) {
-
-                        return Container(
-                          height: 200,
-                          width: 100,
-                          color: Colors.red,
-                        );
-
-
-                      },
-
-                    ),
+                }
                 )
 
                 ),
